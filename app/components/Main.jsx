@@ -26,13 +26,16 @@ var Main = React.createClass({
     cells[xcoord][ycoord] = cond;
     this.setState({cells: cells});
   },
+  handleButtonClick: function(button) {
+    if (button === 'start') {} else if (button === 'incrememt') {} else if (button === 'stop') {}
+  },
   render: function() {
-    var {board, cells} = this.state;
+    var {board, cells, started} = this.state;
     return (
       <div className="container">
         <Title/>
         <Grid board={board} cells={cells} onGridClick={this.handleGridClick}/>
-        <Controls/>
+        <Controls started={started} onButtonClick={this.handleButtonClick}/>
         <Info/>
       </div>
     );

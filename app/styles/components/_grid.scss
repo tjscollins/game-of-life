@@ -10,17 +10,17 @@
   width: 10px;
   margin: -1px;
   float:left;
-  background: black;
+  background: $dead-color;
 }
 
 .square-alive {
   @extend .square;
-  background:pink;
+  background:$living-color;
 }
 
 .square-alive2 {
   @extend .square;
-  background:red;
+  background:$long-living-color;
 }
 
 .board-row {

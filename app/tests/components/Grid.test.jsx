@@ -70,10 +70,10 @@ describe('Grid', () => {
     var grid = TestUtils.renderIntoDocument(<Grid onGridClick={spy} board={state.board} cells={state.cells}/>);
     var $el = $(ReactDOM.findDOMNode(grid));
     TestUtils.Simulate.click($el.find('.square')[0]);
-    expect(spy).toHaveBeenCalledWith(0, 0, 1);
+    expect(spy).toHaveBeenCalledWith(0, 2, 1);
     TestUtils.Simulate.click($el.find('.square-alive')[0]);
-    expect(spy).toHaveBeenCalledWith(0, 1, 2);
+    expect(spy).toHaveBeenCalledWith(1, 1, 2);
     TestUtils.Simulate.click($el.find('.square-alive2')[0]);
-    expect(spy).toHaveBeenCalledWith(1, 0, 0);
+    expect(spy).toHaveBeenCalledWith(2, 2, 0);
   })
 })

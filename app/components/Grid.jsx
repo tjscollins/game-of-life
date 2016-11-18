@@ -15,16 +15,16 @@ var Grid = React.createClass({
       var row = [];
       for (var i = 0; i < cols; i++) {
         if (cells[i][j] === 1) {
-          row.push(
-            <div key={i + 'x' + j} onClick={handleClick.bind(this, i, j, 2)} className="square-alive"></div>
+          row.unshift(
+            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(this, i, j, 2)} className="square-alive"></div>
           );
         } else if (cells[i][j] === 2) {
-          row.push(
-            <div key={i + 'x' + j} onClick={handleClick.bind(this, i, j, 0)} className="square-alive2"></div>
+          row.unshift(
+            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(this, i, j, 0)} className="square-alive2"></div>
           );
         } else {
-          row.push(
-            <div key={i + 'x' + j} onClick={handleClick.bind(this, i, j, 1)} className="square"></div>
+          row.unshift(
+            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(this, i, j, 1)} className="square"></div>
           );
         }
       }
@@ -35,7 +35,7 @@ var Grid = React.createClass({
       var rows = board.match(re);
       var grid = []
       for (var i = 0; i < rows; i++) {
-        grid.push(
+        grid.unshift(
           <div key={'row' + i} className="board-row row">{createRow(board, i)}</div>
         );
       }
