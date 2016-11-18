@@ -2,8 +2,10 @@ var React = require('react');
 
 var Title = (props) => {
   return (
-    <div>
-      <h1>Title.jsx</h1>
+    <div className="row">
+      <div className="title-box col-xs-10 col-xs-push-1">
+        <h1 className="page-title">Conway's Game of Life</h1>
+      </div>
     </div>
   );
 };
