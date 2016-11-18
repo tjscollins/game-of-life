@@ -1,8 +1,14 @@
 var React = require('react');
 
 var Grid = React.createClass({
+  handleClick: function(i, j, cond, e) {
+    var {onGridClick} = this.props;
+    e.preventDefault();
+    onGridClick(i, j, cond);
+  },
   render: function() {
     var {board, cells} = this.props;
+    var handleClick = this.handleClick;
     var createRow = function(board, j) {
       var re = new RegExp(/^\d+/);
       var cols = board.match(re);
@@ -10,15 +16,15 @@ var Grid = React.createClass({
       for (var i = 0; i < cols; i++) {
         if (cells[i][j] === 1) {
           row.push(
-            <div key={i + 'x' + j} className="square-alive"></div>
+            <div key={i + 'x' + j} onClick={handleClick.bind(this, i, j, 2)} className="square-alive"></div>
           );
         } else if (cells[i][j] === 2) {
           row.push(
-            <div key={i + 'x' + j} className="square-alive2"></div>
+            <div key={i + 'x' + j} onClick={handleClick.bind(this, i, j, 0)} className="square-alive2"></div>
           );
         } else {
           row.push(
-            <div key={i + 'x' + j} className="square"></div>
+            <div key={i + 'x' + j} onClick={handleClick.bind(this, i, j, 1)} className="square"></div>
           );
         }
       }

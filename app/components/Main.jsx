@@ -21,12 +21,17 @@ var Main = React.createClass({
       ]
     }
   },
+  handleGridClick: function(xcoord, ycoord, cond) {
+    var {cells} = this.state;
+    cells[xcoord][ycoord] = cond;
+    this.setState({cells: cells});
+  },
   render: function() {
     var {board, cells} = this.state;
     return (
       <div className="container">
         <Title/>
-        <Grid board={board} cells={cells}/>
+        <Grid board={board} cells={cells} onGridClick={this.handleGridClick}/>
         <Controls/>
         <Info/>
       </div>
