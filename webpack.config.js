@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
   entry: [
     'script!jquery/dist/jquery.min.js',
-    'script!foundation-sites/dist/foundation.min.js',
+    'script!bootstrap/dist/js/bootstrap.min.js',
     './app/app.jsx'
   ],
   externals: {
@@ -13,7 +13,8 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       '$': 'jquery',
-      'jQuery': 'jquery'
+      'jQuery': 'jquery',
+      'jquery': 'jquery'
     })
   ],
   output: {
@@ -41,6 +42,21 @@ module.exports = {
       },
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components)/
+    }, {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader'
+    }, {
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "file"
+    }, {
+      test: /\.(woff|woff2)$/,
+      loader: "url?prefix=font/&limit=5000"
+    }, {
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=application/octet-stream"
+    }, {
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      loader: "url?limit=10000&mimetype=image/svg+xml"
     }]
   },
   sassLoader: {
