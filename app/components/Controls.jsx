@@ -23,7 +23,6 @@ var Controls = React.createClass({
     return (
       <div className="row">
         <div className="controls-box col-xs-10 col-xs-push-1">
-          <h1>Controls.jsx</h1>
           <button onClick={this.handleStart} className="btn btn-primary btn-start">Start</button>
           <button onClick={this.handleIncrement} className="btn btn-info btn-once">Increment</button>
           <button onClick={this.handleStop} className="btn btn-danger btn-stop">Stop</button>
