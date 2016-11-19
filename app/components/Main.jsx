@@ -7,9 +7,9 @@ var Grid = require('Grid');
 
 var Main = React.createClass({
   getInitialState: function() {
-    var board = '4x4';
+    var board = '50x30';
     var cols = board.match(/^\d+/);
-    var rows = board.match(/\d$/);
+    var rows = board.match(/\d+$/);
     function createArray(length) {
       var arr = new Array(length || 0),
         i = length;
@@ -23,7 +23,6 @@ var Main = React.createClass({
         }
       return arr;
     }
-    console.log(createArray(cols, rows));
     return {
       started: false,
       board: board,
@@ -58,7 +57,7 @@ var Main = React.createClass({
     };
     var newCells = newArray(cells);
     var cols = board.match(/^\d+/);
-    var rows = board.match(/\d$/);
+    var rows = board.match(/\d+$/);
     for (var i = 0; i < cols; i++) {
       for (var j = 0; j < rows; j++) {
         var count = 0;
@@ -82,7 +81,7 @@ var Main = React.createClass({
     }
     this.setState({cells: newCells});
     if (this.state.started) {
-      timeout = setTimeout(that.incrementGame, 1000);
+      timeout = setTimeout(that.incrementGame, 125);
       this.setState({timeout: timeout});
     }
   },

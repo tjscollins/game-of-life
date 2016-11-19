@@ -16,15 +16,15 @@ var Grid = React.createClass({
       for (var i = 0; i < cols; i++) {
         if (cells[i][j] === 1) {
           row.unshift(
-            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(this, i, j, 2)} className="square-alive"></div>
+            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(null, i, j, 2)} className="square-alive"></div>
           );
         } else if (cells[i][j] === 2) {
           row.unshift(
-            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(this, i, j, 0)} className="square-alive2"></div>
+            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(null, i, j, 0)} className="square-alive2"></div>
           );
         } else {
           row.unshift(
-            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(this, i, j, 1)} className="square"></div>
+            <div key={i + 'x' + j} id={i + 'x' + j} onClick={handleClick.bind(null, i, j, 1)} className="square"></div>
           );
         }
       }
