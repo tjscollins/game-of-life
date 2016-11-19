@@ -13,7 +13,12 @@ describe('Main', () => {
 
   it('should properly increment the game each time incrementGame is called', () => {
     var main = TestUtils.renderIntoDocument(<Main/>);
-    main.setState({
+    var testMainIncrement = (state, expectedCells) => {
+      main.setState(state);
+      main.incrementGame();
+      expect(main.state.cells).toEqual(expectedCells)
+    }
+    testMainIncrement({
       started: false,
       board: '3x3',
       cells: [
@@ -25,9 +30,7 @@ describe('Main', () => {
         ],
         [0, 0, 0]
       ]
-    })
-    main.incrementGame();
-    var expectedCells = [
+    }, [
       [
         2, 2, 0
       ],
@@ -35,9 +38,8 @@ describe('Main', () => {
         2, 2, 0
       ],
       [0, 0, 0]
-    ];
-    expect(main.state.cells).toEqual(expectedCells);
-    main.setState({
+    ]);
+    testMainIncrement({
       started: false,
       board: '4x4',
       cells: [
@@ -52,9 +54,7 @@ describe('Main', () => {
         ],
         [0, 0, 0, 0]
       ]
-    })
-    main.incrementGame();
-    var expectedCells = [
+    }, [
       [
         2, 2, 0, 0
       ],
@@ -65,8 +65,61 @@ describe('Main', () => {
         0, 2, 0, 0
       ],
       [0, 0, 0, 0]
-    ];
-    expect(main.state.cells).toEqual(expectedCells);
+    ]);
+    testMainIncrement({
+      started: false,
+      board: '4x4',
+      cells: [
+        [
+          0, 0, 0, 0
+        ],
+        [
+          0, 1, 2, 0
+        ],
+        [
+          0, 1, 2, 0
+        ],
+        [0, 0, 0, 0]
+      ]
+    }, [
+      [
+        0, 0, 0, 0
+      ],
+      [
+        0, 2, 2, 0
+      ],
+      [
+        0, 2, 2, 0
+      ],
+      [0, 0, 0, 0]
+    ]);
+    testMainIncrement({
+      started: false,
+      board: '4x4',
+      cells: [
+        [
+          0, 0, 0, 0
+        ],
+        [
+          1, 0, 0, 0
+        ],
+        [
+          0, 1, 2, 1
+        ],
+        [0, 0, 0, 0]
+      ]
+    }, [
+      [
+        0, 0, 0, 0
+      ],
+      [
+        0, 1, 1, 0
+      ],
+      [
+        0, 2, 2, 0
+      ],
+      [0, 0, 1, 0]
+    ]);
   });
 
   it('should start the game when start is clicked', () => {

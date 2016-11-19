@@ -7,21 +7,27 @@ var Grid = require('Grid');
 
 var Main = React.createClass({
   getInitialState: function() {
+    var board = '4x4';
+    var cols = board.match(/^\d+/);
+    var rows = board.match(/\d$/);
+    function createArray(length) {
+      var arr = new Array(length || 0),
+        i = length;
+      for (var j = 0; j < length; j++) {
+        arr[j] = 0;
+      }
+      if (arguments.length > 1) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        while (i--)
+          arr[length - 1 - i] = createArray.apply(this, args);
+        }
+      return arr;
+    }
+    console.log(createArray(cols, rows));
     return {
       started: false,
-      board: '4x3',
-      cells: [
-        [
-          0, 1, 0
-        ],
-        [
-          0, 0, 1
-        ],
-        [
-          2, 0, 0
-        ],
-        [1, 1, 1]
-      ],
+      board: board,
+      cells: createArray(cols, rows),
       timeout: undefined
     }
   },
@@ -45,7 +51,12 @@ var Main = React.createClass({
   incrementGame: function() {
     var {started, cells, board, timeout} = this.state;
     var that = this;
-    var newCells = cells;
+    var newArray = (array) => {
+      return array.map((arr) => {
+        return [...arr];
+      })
+    };
+    var newCells = newArray(cells);
     var cols = board.match(/^\d+/);
     var rows = board.match(/\d$/);
     for (var i = 0; i < cols; i++) {
@@ -53,7 +64,7 @@ var Main = React.createClass({
         var count = 0;
         for (var k = Math.max(0, i - 1); k <= Math.min(cols - 1, i + 1); k++) {
           for (var l = Math.max(0, j - 1); l <= Math.min(rows - 1, j + 1); l++) {
-            if (k != 0 || l != 0) {
+            if (k != i || l != j) {
               if (cells[k][l] === 1 || cells[k][l] === 2) {
                 count++;
               }

@@ -43,7 +43,6 @@ var Grid = React.createClass({
     }
     return (
       <div className="board container">
-        <h1>Grid.jsx</h1>
         {createGrid(board)}
       </div>
     );
