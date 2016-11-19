@@ -68,4 +68,49 @@ describe('Main', () => {
     ];
     expect(main.state.cells).toEqual(expectedCells);
   });
+
+  it('should start the game when start is clicked', () => {
+    var main = TestUtils.renderIntoDocument(<Main/>);
+    main.setState({
+      started: false,
+      board: '3x3',
+      cells: [
+        [
+          1, 1, 0
+        ],
+        [
+          1, 1, 0
+        ],
+        [0, 0, 0]
+      ],
+      timeout: undefined
+    })
+    var $el = $(ReactDOM.findDOMNode(main));
+    TestUtils.Simulate.click($el.find('.btn-start')[0]);
+    expect(main.state.started).toBe(true);
+    expect(main.state.timeout).toExist();
+  });
+
+  it('should stop the game when stop is clicked', () => {
+    var main = TestUtils.renderIntoDocument(<Main/>);
+    main.setState({
+      started: false,
+      board: '3x3',
+      cells: [
+        [
+          1, 1, 0
+        ],
+        [
+          1, 1, 0
+        ],
+        [0, 0, 0]
+      ],
+      timeout: undefined
+    })
+    var $el = $(ReactDOM.findDOMNode(main));
+    TestUtils.Simulate.click($el.find('.btn-start')[0]);
+    TestUtils.Simulate.click($el.find('.btn-stop')[0]);
+    expect(main.state.started).toBe(false);
+    expect(main.state.timeout).toBe(undefined);
+  })
 })

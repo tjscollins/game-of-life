@@ -21,7 +21,8 @@ var Main = React.createClass({
           2, 0, 0
         ],
         [1, 1, 1]
-      ]
+      ],
+      timeout: undefined
     }
   },
   handleGridClick: function(xcoord, ycoord, cond) {
@@ -30,12 +31,20 @@ var Main = React.createClass({
     this.setState({cells: cells});
   },
   handleButtonClick: function(button) {
-    if (button === 'start') {} else if (button === 'increment') {
+    if (button === 'start') {
+      this.setState({
+        started: true
+      }, this.incrementGame);
+    } else if (button === 'increment') {
       this.incrementGame();
-    } else if (button === 'stop') {}
+    } else if (button === 'stop') {
+      clearTimeout(this.state.timeout);
+      this.setState({started: false, timeout: undefined});
+    }
   },
   incrementGame: function() {
-    var {started, cells, board} = this.state;
+    var {started, cells, board, timeout} = this.state;
+    var that = this;
     var newCells = cells;
     var cols = board.match(/^\d+/);
     var rows = board.match(/\d$/);
@@ -61,6 +70,10 @@ var Main = React.createClass({
       }
     }
     this.setState({cells: newCells});
+    if (this.state.started) {
+      timeout = setTimeout(that.incrementGame, 1000);
+      this.setState({timeout: timeout});
+    }
   },
   render: function() {
     var {board, cells, started} = this.state;
