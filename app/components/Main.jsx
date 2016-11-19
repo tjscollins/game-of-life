@@ -7,28 +7,27 @@ var Grid = require('Grid');
 
 var Main = React.createClass({
   getInitialState: function() {
-    var board = '50x30';
-    var cols = board.match(/^\d+/);
-    var rows = board.match(/\d+$/);
-    function createArray(length) {
-      var arr = new Array(length || 0),
-        i = length;
-      for (var j = 0; j < length; j++) {
-        arr[j] = 0;
-      }
-      if (arguments.length > 1) {
-        var args = Array.prototype.slice.call(arguments, 1);
-        while (i--)
-          arr[length - 1 - i] = createArray.apply(this, args);
-        }
-      return arr;
-    }
+    var cols = 48;
+    var rows = 27;
     return {
       started: false,
-      board: board,
-      cells: createArray(cols, rows),
+      board: cols + 'x' + rows,
+      cells: this.createArray(cols, rows),
       timeout: undefined
     }
+  },
+  createArray: function(length) {
+    var arr = new Array(length || 0),
+      i = length;
+    for (var j = 0; j < length; j++) {
+      arr[j] = 0;
+    }
+    if (arguments.length > 1) {
+      var args = Array.prototype.slice.call(arguments, 1);
+      while (i--)
+        arr[length - 1 - i] = this.createArray.apply(this, args);
+      }
+    return arr;
   },
   handleGridClick: function(xcoord, ycoord, cond) {
     var {cells} = this.state;
@@ -45,6 +44,17 @@ var Main = React.createClass({
     } else if (button === 'stop') {
       clearTimeout(this.state.timeout);
       this.setState({started: false, timeout: undefined});
+    } else if (button === 'clear') {
+      clearTimeout(this.state.timeout);
+      var {board} = this.state;
+      var cols = board.match(/^\d+/);
+      var rows = board.match(/\d+$/);
+      this.setState({
+        started: false,
+        board: board,
+        cells: this.createArray(cols, rows),
+        timeout: undefined
+      });
     }
   },
   incrementGame: function() {

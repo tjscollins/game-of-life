@@ -19,6 +19,10 @@ var Controls = React.createClass({
       onButtonClick('stop');
     }
   },
+  handleClear: function() {
+    var {onButtonClick} = this.props;
+    onButtonClick('clear');
+  },
   render: function() {
     return (
       <div className="row">
@@ -26,10 +30,11 @@ var Controls = React.createClass({
           <button onClick={this.handleStart} className="btn btn-primary btn-start">Start</button>
           <button onClick={this.handleIncrement} className="btn btn-info btn-once">Increment</button>
           <button onClick={this.handleStop} className="btn btn-danger btn-stop">Stop</button>
+          <button onClick={this.handleClear} className="btn btn-warning btn-clear">Clear</button>
         </div>
       </div>
     );
   }
 });
 
-module.exports = Controls;
+module.exports = Controls;;

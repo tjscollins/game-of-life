@@ -1,6 +1,27 @@
+.btn {
+  display: flex;
+  width: 20%;
+}
+
+.btn-start {
+  margin: 5px auto;
+  margin-right: 5px;
+}
+
+.btn-once, .btn-stop {
+  margin: 5px;
+}
+
+.btn-clear {
+  margin: 5px auto;
+  margin-left: 5px;
+}
+
 .controls-box {
   border: 1px solid black;
   background: #fafafa;
   color: #aaa;
   border-top: none;
+  padding-bottom: 5px;
+text-align: center;
 }
