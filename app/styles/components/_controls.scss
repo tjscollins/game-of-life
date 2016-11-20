@@ -6,22 +6,29 @@
 .btn-start {
   margin: 5px auto;
   margin-right: 5px;
+  @include button-variant($btn-text, $btn-start-bg, $btn-start-border);
 }
 
 .btn-once, .btn-stop {
   margin: 5px;
+  @include button-variant($btn-text, $btn-once-bg, $btn-once-border);
 }
 
 .btn-clear {
   margin: 5px auto;
   margin-left: 5px;
+  @include button-variant($btn-text, $btn-clear-bg, $btn-clear-border);
+}
+
+.btn-stop {
+  @include button-variant($btn-text, $btn-stop-bg, $btn-stop-border);
 }
 
 .controls-box {
-  border: 1px solid black;
+  border: $border;
   background: #fafafa;
   color: #aaa;
   border-top: none;
   padding-bottom: 5px;
-text-align: center;
+  text-align: center;
 }

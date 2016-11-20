@@ -1,7 +1,11 @@
 @import "base/variables";
 
+//Bootstrap
+@import "bootstrap/mixins/buttons";
+
 //Components
-@import "components/grid";
-@import "components/title";
 @import "components/controls";
+@import "components/grid";
 @import "components/info";
+@import "components/main";
+@import "components/title";

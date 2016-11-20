@@ -3,7 +3,7 @@ var React = require('react');
 var Info = (props) => {
   return (
     <div className="info-box">
-      <h1>Info.jsx</h1>
+      <h2>About</h2>
     </div>
   );
 };

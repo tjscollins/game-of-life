@@ -1,15 +1,20 @@
 .info-box {
   position: fixed;
-  left: 97%;
+  left: 85%;
   top: 9%;
   bottom: 40%;
   width: 25%;
-  transition: left 0.5s ease;
-  border: 1px solid black;
-  background: #fafafa;
-  color: #aaa;
+  transition: color 0.5s ease, left 0.5s ease;
+  border: $border;
+  border-radius: 5px;
+  background: $background-grey;
+  color: $background-grey;
 
+  h2 {
+    text-align: center;
+}
   &:hover {
-    left:75%
+    left: 75%;
+    color: $living-color;
   }
 }
