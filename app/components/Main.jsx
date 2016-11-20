@@ -7,7 +7,7 @@ var Grid = require('Grid');
 var GameofLife = require('GameofLife');
 
 var Main = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     var cols = 45;
     var rows = 27;
     return {
@@ -15,10 +15,11 @@ var Main = React.createClass({
       board: cols + 'x' + rows,
       cells: this.createArray(cols, rows),
       livingCells: {},
-      timeout: undefined
+      timeout: undefined,
+      speed: 50
     }
   },
-  createArray: function(length) {
+  createArray: function (length) {
     var arr = new Array(length || 0),
       i = length;
     for (var j = 0; j < length; j++) {
@@ -31,7 +32,7 @@ var Main = React.createClass({
       }
     return arr;
   },
-  handleGridClick: function(xcoord, ycoord, cond) {
+  handleGridClick: function (xcoord, ycoord, cond) {
     var {cells, livingCells} = this.state;
     cells[xcoord][ycoord] = cond;
     if (cond) {
@@ -41,7 +42,7 @@ var Main = React.createClass({
     }
     this.setState({cells: cells, livingCells: livingCells});
   },
-  handleButtonClick: function(button) {
+  handleButtonClick: function (button) {
     if (button === 'start') {
       this.setState({
         started: true
@@ -65,7 +66,7 @@ var Main = React.createClass({
       });
     }
   },
-  incrementGame: function() {
+  incrementGame: function () {
     var {started, cells, board, timeout, livingCells} = this.state;
     var that = this;
     var newArray = (array) => {
@@ -78,56 +79,15 @@ var Main = React.createClass({
     var cols = board.match(/^\d+/)[0];
     var rows = board.match(/\d+$/)[0];
 
-    //Algorithm that tracks living cells and checks only squares around them.
-    //Currently too inefficient because it repeatedly checks cells for each livingCells
-    //neighbor.  Need a way to only check each cell once.
-
-    /*    for (var square in livingCells) {
-      var x = parseInt(square.match(/^\d+/)[0]);
-      var y = parseInt(square.match(/\d+$/)[0]);
-
-      for (var k = Math.max(0, x - 1); k <= Math.min(cols - 1, x + 1); k++) {
-        for (var l = Math.max(0, y - 1); l <= Math.min(rows - 1, y + 1); l++) {
-          newCells[k][l] = checkNeighbors(k, l, this.state.cells);
-          if (newCells[k][l]) {
-            newLivingCells[k + 'x' + l] = newCells[k][l];
-          } else {
-            delete newLivingCells[k + 'x' + l];
-          }
-        }
-      }
-    }
-
-    function checkNeighbors(x, y, cells) {
-      var count = 0;
-      for (var k = Math.max(0, x - 1); k <= Math.min(cols - 1, x + 1); k++) {
-        for (var l = Math.max(0, y - 1); l <= Math.min(rows - 1, y + 1); l++) {
-          if (k != x || l != y) {
-            if (cells[k][l] === 1 || cells[k][l] === 2) {
-              count++;
-            }
-          }
-        }
-      }
-      if (cells[x][y] && (count === 2 || count === 3)) {
-        return 2;
-      } else if (!cells[x][y] && count === 3) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }*/
-
-    //This Algorithm checks the neighbors of every cell once.  Might be improved by storing counts and changed flags so they can be rechecked quickly.
     GameofLife.bruteForce(cols, rows, cells, newCells, livingCells);
 
-    this.setState({cells: newCells, livingCells: newLivingCells});
+    this.setState({cells: newCells, livingCells});
     if (this.state.started) {
-      timeout = setTimeout(that.incrementGame, 125);
-      this.setState({timeout: timeout});
+      timeout = setTimeout(that.incrementGame, that.state.speed);
+      this.setState({timeout});
     }
   },
-  render: function() {
+  render: function () {
     var {board, cells, started} = this.state;
     return (
       <div className="container">
