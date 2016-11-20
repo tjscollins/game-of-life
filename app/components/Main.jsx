@@ -10,10 +10,11 @@ var Main = React.createClass({
   getInitialState: function () {
     var cols = 45;
     var rows = 27;
+    var cells = GameofLife.randomStart(cols, rows);
     return {
       started: false,
       board: cols + 'x' + rows,
-      cells: this.createArray(cols, rows),
+      cells,
       livingCells: {},
       timeout: undefined,
       speed: 50

@@ -1,3 +1,17 @@
+var randomStart = function (length) {
+  var arr = new Array(length || 0),
+    i = length;
+  for (var j = 0; j < length; j++) {
+    arr[j] = Math.round(Math.abs(Math.random() - 0.33));
+  }
+  if (arguments.length > 1) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    while (i--)
+      arr[length - 1 - i] = randomStart.apply(this, args);
+    }
+  return arr;
+}
+
 var bruteForce = (cols, rows, cells, newCells, livingCells) => {
   // This Algorithm checks the neighbors of every cell in the grid once.
   // For an n x n grid this results in O(n^2) performance.  Specifically 8n^2 status checks
@@ -76,6 +90,7 @@ var checkAllNeighborsOfAllLiving = (cols, rows, cells, newCells, livingCells, ne
 }
 
 module.exports = {
+  randomStart,
   bruteForce,
   checkAllNeighborsOfAllLiving
 }
