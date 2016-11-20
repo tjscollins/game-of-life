@@ -4,7 +4,7 @@
   top: 9%;
   bottom: 40%;
   width: 25%;
-  transition: color 0.5s ease, left 0.5s ease;
+  transition: color 0.75s ease, left 0.75s ease, background 0.75s ease-in-out;
   border: $border;
   border-radius: 5px;
   background: $background-grey;
@@ -12,9 +12,14 @@
 
   h2 {
     text-align: center;
-}
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+  }
   &:hover {
     left: 75%;
-    color: $living-color;
+    color: $long-living-color;
+    background: transparentize($background-grey, 0.5);
   }
 }
