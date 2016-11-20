@@ -65,7 +65,8 @@ var Main = React.createClass({
         board: board,
         cells: this.zeroArray(cols, rows),
         timeout: undefined,
-        livingCells: {}
+        livingCells: {},
+        generations: 0
       });
     }
   },
