@@ -3,6 +3,10 @@
   height: 50vh;
   border: 1px solid black;
 }
+.board-row {
+  float: none;
+  margin: 0 auto;
+}
 
 .square {
   border: 1px solid grey;

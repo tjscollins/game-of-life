@@ -36,13 +36,17 @@ var Grid = React.createClass({
       var grid = []
       for (var i = 0; i < rows; i++) {
         grid.unshift(
-          <div key={'row' + i} className="board-row row">{createRow(board, i)}</div>
+          <div key={'row' + i} className="row">
+            <div className="board-row col-xs-10 col-xs-push-1">
+              {createRow(board, i)}
+            </div>
+          </div>
         );
       }
       return grid;
     }
     return (
-      <div className="board container">
+      <div className="board">
         {createGrid(board)}
       </div>
     );
