@@ -4,6 +4,7 @@ var Title = require('Title');
 var Info = require('Info');
 var Controls = require('Controls');
 var Grid = require('Grid');
+var Status = require('Status');
 var GameofLife = require('GameofLife');
 
 var Main = React.createClass({
@@ -17,10 +18,11 @@ var Main = React.createClass({
       cells,
       livingCells: {},
       timeout: undefined,
-      speed: 50
+      speed: 50,
+      generations: 0
     }
   },
-  createArray: function (length) {
+  zeroArray: function (length) {
     var arr = new Array(length || 0),
       i = length;
     for (var j = 0; j < length; j++) {
@@ -29,7 +31,7 @@ var Main = React.createClass({
     if (arguments.length > 1) {
       var args = Array.prototype.slice.call(arguments, 1);
       while (i--)
-        arr[length - 1 - i] = this.createArray.apply(this, args);
+        arr[length - 1 - i] = this.zeroArray.apply(this, args);
       }
     return arr;
   },
@@ -61,14 +63,21 @@ var Main = React.createClass({
       this.setState({
         started: false,
         board: board,
-        cells: this.createArray(cols, rows),
+        cells: this.zeroArray(cols, rows),
         timeout: undefined,
         livingCells: {}
       });
     }
   },
   incrementGame: function () {
-    var {started, cells, board, timeout, livingCells} = this.state;
+    var {
+      started,
+      cells,
+      board,
+      timeout,
+      livingCells,
+      generations
+    } = this.state;
     var that = this;
     var newArray = (array) => {
       return array.map((arr) => {
@@ -81,19 +90,20 @@ var Main = React.createClass({
     var rows = board.match(/\d+$/)[0];
 
     GameofLife.bruteForce(cols, rows, cells, newCells, livingCells);
+    generations++;
 
-    this.setState({cells: newCells, livingCells});
+    this.setState({cells: newCells, livingCells, generations});
     if (this.state.started) {
       timeout = setTimeout(that.incrementGame, that.state.speed);
       this.setState({timeout});
     }
   },
   render: function () {
-    var {board, cells, started} = this.state;
+    var {board, cells, started, speed, generations} = this.state;
     return (
       <div className="container">
         <Title/>
-        <Grid board={board} cells={cells} onGridClick={this.handleGridClick}/>
+        <Grid speed={speed} generations={generations} board={board} cells={cells} onGridClick={this.handleGridClick}/>
         <Controls started={started} onButtonClick={this.handleButtonClick}/>
         <Info/>
       </div>

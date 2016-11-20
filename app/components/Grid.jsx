@@ -1,4 +1,5 @@
 var React = require('react');
+var Status = require('Status');
 
 var Grid = React.createClass({
   handleClick: function (i, j, cond, e) {
@@ -7,7 +8,7 @@ var Grid = React.createClass({
     onGridClick(i, j, cond);
   },
   render: function () {
-    var {board, cells} = this.props;
+    var {board, cells, speed, generations} = this.props;
     var handleClick = this.handleClick;
     var createRow = function (board, j) {
       var re = new RegExp(/^\d+/);
@@ -47,6 +48,9 @@ var Grid = React.createClass({
     }
     return (
       <div className="board">
+        <div className="status-box">
+          <Status speed={speed} generations={generations}/>
+        </div>
         {createGrid(board)}
       </div>
     );

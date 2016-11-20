@@ -7,8 +7,8 @@
   transition: color 0.75s ease, left 0.75s ease, background 0.75s ease-in-out;
   border: $border;
   border-radius: 5px;
-  background: $background-grey;
-  color: $background-grey;
+  background: transparentize($background-grey, 1);
+  color: transparentize($background-grey, 1);
 
   h2 {
     text-align: center;

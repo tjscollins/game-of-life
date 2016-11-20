@@ -1,0 +1,21 @@
+.status-box {
+  position: fixed;
+  left: 0;
+  top: 9%;
+  bottom: 40%;
+  width: 10%;
+  transition: color 0.75s ease, left 0.75s ease, background 0.75s ease-in-out;
+  border: $border;
+  border-radius: 5px;
+  color: transparentize($long-living-color, 0.5);
+  background: transparentize($background-grey, 0.5);
+  z-index: 1;
+
+  h2 {
+    text-align: left;
+    padding-left: 10px;
+  }
+  p {
+    padding-left: 10px;
+  }
+}
