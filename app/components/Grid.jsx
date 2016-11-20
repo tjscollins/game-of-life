@@ -1,15 +1,15 @@
 var React = require('react');
 
 var Grid = React.createClass({
-  handleClick: function(i, j, cond, e) {
+  handleClick: function (i, j, cond, e) {
     var {onGridClick} = this.props;
     e.preventDefault();
     onGridClick(i, j, cond);
   },
-  render: function() {
+  render: function () {
     var {board, cells} = this.props;
     var handleClick = this.handleClick;
-    var createRow = function(board, j) {
+    var createRow = function (board, j) {
       var re = new RegExp(/^\d+/);
       var cols = board.match(re);
       var row = [];
@@ -30,13 +30,13 @@ var Grid = React.createClass({
       }
       return row;
     };
-    var createGrid = function(board) {
+    var createGrid = function (board) {
       var re = new RegExp(/\d+$/);
       var rows = board.match(re);
       var grid = []
       for (var i = 0; i < rows; i++) {
         grid.unshift(
-          <div key={'row' + i} className="row">
+          <div key={'row' + i} className="">
             <div className="board-row col-xs-10 col-xs-push-1">
               {createRow(board, i)}
             </div>
